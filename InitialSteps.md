@@ -3,6 +3,7 @@
 learning and programming on VS Code 
 
 IMPORTANT: having winAVR-gcc installed.
+
 EXTENTION USED: C/C++ (Microsoft)
 
 This can be checked on Windows by gowing to PowerShell and `where.exe avr-gcc`
