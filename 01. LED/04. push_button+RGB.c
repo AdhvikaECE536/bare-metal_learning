@@ -1,5 +1,6 @@
 // push buttons: VCC through resistors, GND direct and OUT to pin 11, 12, 13
 // LED: cathode to GND and 3 Anodes to pin 26, 27, 28 using resistors 
+// ref for connections: https://www.oceanlabz.in/interface/?srsltid=AfmBOopI7RSeH60mo-YOa1OxatCUDGiT8zt9yAKHSaptv9EI8hnafnsV
 
 #include<avr/io.h>
 #include<avr/iom8.h>
