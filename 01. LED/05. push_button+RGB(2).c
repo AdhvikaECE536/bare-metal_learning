@@ -15,14 +15,12 @@ int main(){
     DDRD &= ~((1 << DDD6) | (1 << DDD7)); // DDD5, DDD6, DDD7 as inputs
 
 
-    int state;
+
     PORTC = 0;
     long i;
 
     while (1) {
-        
-        state = 0;
-        
+                
         if (PIND & (1 << DDD7)) {
             for (i= 0; i<100000; i++){
                  PORTC = (1<<PINC5);
