@@ -3,7 +3,7 @@
 
 int main(){
     DDRC |= (1<< DDC3);
-    DDRD &= ~(1<< DDD1)
+    DDRD &= ~(1<< DDD1);
 
     while (1) {
         if (PIND & (1 << PIND1)){
