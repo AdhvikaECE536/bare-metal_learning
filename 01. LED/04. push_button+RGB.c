@@ -1,5 +1,5 @@
 // push buttons: VCC through resistors, GND direct and OUT to pin 11, 12, 13
-// LED: cathode to GND and 3 Anodes to pin 26, 27, 28 using resistors 
+// RGB LED: cathode to GND and 3 Anodes to pin 26, 27, 28 using resistors 
 // ref for connections: https://www.oceanlabz.in/interface/?srsltid=AfmBOopI7RSeH60mo-YOa1OxatCUDGiT8zt9yAKHSaptv9EI8hnafnsV
 
 #include<avr/io.h>
@@ -8,24 +8,26 @@
 int main(){
     DDRC |= (7 << DDC3); //DDC3, DDC4, DDC5 as outputs
     DDRD &= ~(7 << DDD5); // DDD5, DDD6, DDD7 as inputs
-    
-    long i;
-    while (1) {
-        if (PIND & (1 << PIND7)){
-            PORTC = (1 << DDC5);
-        }
-        else if (PIND & (1 << PIND6)){
-            PORTC = (1<< DDC4); // if you do  PORTC |= (1<< DDC4), it is not going to overwrite and mix the colors 
-        }
-        else if (PIND & (1 << PIND5)){
-            PORTC = (1<< DDC3);
-        }
-        else
-            PORTC =0;
 
-    }
+    int state;
+    PORTC = 0;
+    while (1) {
+        state = 0;
         
+        if (PIND & (1 << PIND7)){
+            state |= (1 << DDC5);
+        }
+        if (PIND & (1 << PIND6)){
+            state |= (1<< DDC4); 
+        }
+        if (PIND & (1 << PIND5)){
+            state |= (1<< DDC3);
+        }
         
+        PORTC = state;
+
+        // if you use else-if, then the very first true condition that gets true for that cycle will get executed and overwrite rest of the conditions, throwing rest of the checklist away for that cycle
+    }    
 
 return 0;
 
