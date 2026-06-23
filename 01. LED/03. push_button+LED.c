@@ -2,10 +2,8 @@
 #include<avr/iom8.h>
 
 int main(){
-    DDRC |= (1<< DDC5);
-    DDRC |= (1<< DDC4);
     DDRC |= (1<< DDC3);
-// can write as DDRC |= (7 << DDC3);
+    DDRD &= ~(1<< DDD1)
 
     while (1) {
         if (PIND & (1 << PIND1)){
