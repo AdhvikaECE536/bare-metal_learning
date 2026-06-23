@@ -11,98 +11,34 @@
 #include<avr/io.h>
 #include<avr/iom8.h>
 
+void long_delay(long time);
+void flash_rgb_fast();
+void flash_rgb_slow();
+void flash_white();
+
 int main(){
     DDRC |= (1 << DDC3) | (1 << DDC4) | (1 << DDC5);  //DDC3, DDC4, DDC5 as outputs
     DDRD &= ~((1 << DDD6) | (1 << DDD7)); // DDD5, DDD6, DDD7 as inputs
 
-
-
-    PORTC = 0;
     long i;
+    PORTC = 0;
 
     while (1) {
 
                 
         if (PIND & (1 << DDD7)) {
-            for (i= 0; i<10000; i++){
-                 PORTC = (1<<PINC5);
-            }
- 
-            for (i= 0; i<10000; i++){
-                 PORTC = 0;
-            }
-    
-            for (i= 0; i<10000; i++){
-                 PORTC = (1<<PINC4);
-            }
- 
-            for (i= 0; i<10000; i++){
-                 PORTC = 0;
-            }
-    
-            for (i= 0; i<10000; i++){
-                 PORTC = (1<<PINC3);
-            }
- 
-            for (i= 0; i<10000; i++){
-                 PORTC = 0;
-            }
+            flash_rgb_fast();
 
         }
 
         else if (PIND & (1 << DDD6)) {
-            for (i= 0; i<100000; i++){
-                 PORTC = (7<<PINC3);
-            }
- 
-            for (i= 0; i<100000; i++){
-                 PORTC = 0;
-            }
+            flash_white();
         }
 
         else {
-            
-        for (i= 0; i<100000; i++){
-            for (i= 0; i<100000; i++){
-                 PORTC = (1<<PINC5);
-            }
-        }
- 
-        for (i= 0; i<100000; i++){
-            for (i= 0; i<100000; i++){
-                 PORTC = 0;
-            }
+            flash_rgb_slow();
         }
     
-        for (i= 0; i<100000; i++){
-            for (i= 0; i<100000; i++){
-                 PORTC = (1<<PINC4);
-            }
-        }
- 
-        for (i= 0; i<100000; i++){
-            for (i= 0; i<100000; i++){
-                 PORTC = 0;
-            }
-        }
-    
-        for (i= 0; i<100000; i++){
-            for (i= 0; i<100000; i++){
-                 PORTC = (1<<PINC3);
-            }
-        }
- 
-        for (i= 0; i<100000; i++){
-            for (i= 0; i<100000; i++){
-                 PORTC = 0;
-            }
-        }
-        }
-    
-
-        
-
-
         PORTC &= ~((1 << DDC3) | (1 << DDC4) | (1 << DDC5));
 
 
@@ -111,4 +47,65 @@ int main(){
 
 return 0;
 
+}
+
+
+
+void long_delay(long time){
+    volatile long i;
+    for (i=0; i<time; i++){
+        for (i=0; i<time; i++){
+        }
+    }
+}
+
+void flash_rgb_fast(){
+    PORTC = (1<<PINC5);
+    long_delay(10000);
+
+    PORTC = 0;
+    long_delay(10000);
+
+    PORTC = (1<<PINC4);
+    long_delay(10000);
+
+    PORTC = 0;
+    long_delay(10000);
+
+    PORTC = (1<<PINC3);
+    long_delay(10000);
+
+    PORTC = 0;
+    long_delay(10000);
+        
+}
+
+
+void flash_white(){
+    PORTC = (7<<PINC3);
+    long_delay(10000);
+
+    PORTC = 0;
+    long_delay(10000);
+
+}
+
+void flash_rgb_slow(){
+    PORTC = (1<<PINC5);
+    long_delay(100000);
+
+    PORTC = 0;
+    long_delay(100000);
+
+    PORTC = (1<<PINC4);
+    long_delay(100000);
+
+    PORTC = 0;
+    long_delay(100000);
+
+    PORTC = (1<<PINC3);
+    long_delay(100000);
+
+    PORTC = 0;
+    long_delay(100000);
 }
